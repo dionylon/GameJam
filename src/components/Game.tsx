@@ -8,7 +8,7 @@ import { clsx } from 'clsx';
 const Game: React.FC = () => {
   const { 
     tiles, slots, status, difficulty, levelConfigs, useImages,
-    initGame, clickTile, restart, setDifficulty, updateLevelConfig, resetLevelConfig, toggleUseImages
+    initGame, clickTile, restart, setDifficulty, updateLevelConfig, resetLevelConfig
   } = useGameStore();
   const [showSettings, setShowSettings] = useState(false);
 
@@ -88,6 +88,7 @@ const Game: React.FC = () => {
               </div>
 
               {/* Style Settings */}
+              {/* 图片设置已强制开启，暂不需要显示开关，如果未来需要切换可以解开注释
               <div className="space-y-2">
                 <label className="text-sm font-bold text-gray-700">样式设置</label>
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-100">
@@ -109,8 +110,9 @@ const Game: React.FC = () => {
                   开启后将尝试加载 <code className="bg-gray-100 px-1 rounded">/public/tiles/[type].png</code>，如不存在则显示默认图标。
                 </p>
               </div>
-
+              
               <div className="h-px bg-gray-100" />
+              */}
 
               {/* Parameters */}
               <div className="space-y-4">
@@ -225,7 +227,7 @@ const Game: React.FC = () => {
       <div className="w-full max-w-md h-20 bg-gray-800/20 rounded-lg border-2 border-gray-600 flex items-center justify-center gap-1 px-2 relative">
         {slots.map((tile, index) => (
           <div key={`${tile.id}-${index}`} className="transition-all animate-in fade-in zoom-in duration-200">
-             <Tile tile={tile} inSlot />
+             <Tile tile={tile} inSlot useImages={useImages} />
           </div>
         ))}
         {/* 占位格子，保持布局稳定 */}

@@ -78,10 +78,10 @@ export const useGameStore = create<GameState>()(
       status: 'idle',
       difficulty: 'easy',
       levelConfigs: DEFAULT_LEVEL_CONFIGS,
-      useImages: false,
+      useImages: true,
 
       toggleUseImages: () => {
-        set((state) => ({ useImages: !state.useImages }));
+        set(() => ({ useImages: true }));
       },
 
       setDifficulty: (difficulty) => {

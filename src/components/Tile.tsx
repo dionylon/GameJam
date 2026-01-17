@@ -33,6 +33,8 @@ const Tile: React.FC<TileProps> = ({ tile, isCovered, onClick, inSlot, useImages
     setImgError(false);
   }, [useImages]);
 
+  const imgSrc = `/tiles/${tile.type}.png`;
+
   return (
     <div
       onClick={!isCovered ? onClick : undefined}
@@ -54,10 +56,13 @@ const Tile: React.FC<TileProps> = ({ tile, isCovered, onClick, inSlot, useImages
     >
       {useImages && !imgError ? (
         <img 
-          src={`/tiles/${tile.type}.png`} 
+          src={imgSrc} 
           alt={tile.type}
           className="w-4/5 h-4/5 object-contain drop-shadow-sm pointer-events-none"
-          onError={() => setImgError(true)}
+          onError={(e) => {
+            console.error(`Failed to load image: ${imgSrc}`, e);
+            setImgError(true);
+          }}
         />
       ) : (
         <Icon 
