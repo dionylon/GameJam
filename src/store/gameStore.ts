@@ -45,6 +45,8 @@ interface GameState {
   setDifficulty: (difficulty: Difficulty) => void;
   updateLevelConfig: (difficulty: Difficulty, config: Partial<LevelConfig>) => void;
   resetLevelConfig: (difficulty: Difficulty) => void;
+  useImages: boolean;
+  toggleUseImages: () => void;
 }
 
 const TILE_TYPES: TileType[] = ['carrot', 'fire', 'grass', 'stump', 'corn', 'wool', 'brush', 'bucket', 'milk'];
@@ -242,7 +244,6 @@ export const useGameStore = create<GameState>()(
           // 延迟一点消除，为了动画效果（这里先直接消除逻辑，动画由UI处理）
           // 实际开发中最好用 setTimeout 分离状态更新，但在 zustand 里直接更新状态也行
           setTimeout(() => {
-            const currentSlots = get().slots;
             // 注意：这里需要重新获取 slots，因为可能有连续点击
             // 但简单起见，我们假设用户手速没那么快，或者 zustand 批处理了
             
@@ -269,7 +270,7 @@ export const useGameStore = create<GameState>()(
             }
           }, 200); 
         } else {
-          // 检查失败
+          // 检查是否占满卡槽
           if (newSlots.length >= 7) {
             set({ status: 'lost' });
           }
@@ -278,7 +279,7 @@ export const useGameStore = create<GameState>()(
 
       restart: () => {
         get().initGame();
-      }
+      },
     }),
     {
       name: 'sheep-game-storage',

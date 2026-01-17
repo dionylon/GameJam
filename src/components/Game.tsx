@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useGameStore, isTileCovered } from '../store/gameStore';
-import type { Difficulty } from '../store/gameStore';
 import Tile from './Tile';
 import { TILE_WIDTH, TILE_HEIGHT } from '../types/game';
 import { RotateCcw, Play, Settings, RefreshCcw } from 'lucide-react';
